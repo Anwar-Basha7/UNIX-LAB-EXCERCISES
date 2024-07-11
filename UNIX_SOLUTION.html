@@ -1,0 +1,1696 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>UNix LAb program SEE</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="48c01b97-169a-439a-9489-6e4a172e1489" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/solid_blue.png" style="object-position:center 40%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">😎</span></div><h1 class="page-title">UNix LAb program SEE</h1><p class="page-description"></p></header><div class="page-body"><p id="1818d785-12b6-46d8-a46c-5f0844a596e5" class="">
+</p><h1 id="500e0d1c-c097-457e-a549-5752b3d1e1d3" class="">problem Statements:</h1><figure id="e486af59-6671-48ca-b2c4-bd24611d7440"><div class="source"><a href="UNix%20LAb%20program%20SEE%2048c01b97169a439a94896e4a172e1489/USP-lab-QB.pdf">USP-lab-QB.pdf</a></div></figure><p id="d06e5fa5-ddf1-4af5-8be3-9b6cb6843c33" class="">
+</p><h1 id="a57b7c79-23d2-464b-8103-c8619299d3f1" class="">Solutions</h1><p id="46efd695-b87f-4039-8611-81d0f157d4cb" class=""><strong>Program 1A:</strong></p><p id="c8c30038-94b9-46ba-8ef4-09d1d7251e22" class="">Write a C program to display the file content in reverse order using lseek<br/>system call.<br/></p><p id="f6ca9c45-4459-4bdf-9ad9-045d20213730" class=""><strong>Solution</strong></p><figure id="b4c05b56-129c-4090-90f0-2adf030d5a6b"><div class="source"><a href="UNix%20LAb%20program%20SEE%2048c01b97169a439a94896e4a172e1489/prg1A.c">prg1A.c</a></div></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a172ce95-3a62-46f2-ba32-91600517843a" class="code"><code class="language-C">#include&lt;stdio.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;fcntl.h&gt;
+void display(const char *file)
+{
+    int fd=open(file,O_RDONLY);
+    if(fd&lt;0)
+    {
+        perror(&quot;file opening&quot;);
+        exit(EXIT_FAILURE);
+    }
+    off_t size=lseek(fd,0,SEEK_END);
+    if(size&lt;0)
+    {
+        perror(&quot;file opening&quot;);
+        exit(EXIT_FAILURE);
+    }
+    char ch;
+    for(int i=0;i&lt;=size;i++)
+    {
+        lseek(fd,-i,SEEK_END);
+        read(fd,&amp;ch,1);
+        putchar(ch);
+    }
+    close(fd);
+}
+void main(int argc,char *argv[])
+{
+    if(argc!=2)
+    {
+        perror(&quot;file opening&quot;);
+        exit(EXIT_FAILURE);
+    }
+    display(argv[1]);
+}
+</code></pre><p id="a13f7c52-a8f2-4cdd-b347-9326e538c4e6" class="">
+</p><p id="a2822f43-95b3-4e60-8f05-b03a4b38fb85" class=""><strong>Program 1B:</strong></p><p id="7a95a1de-2c3a-4b35-b2d3-ea998bd758c3" class="">Write a C program to create a child process and show how parent<br/>and child processes will share the text file and justify that both<br/>parent and child share the same file offset.<br/></p><p id="51fb398a-c0f0-4715-849e-cb1c14e42755" class=""><strong>Solution</strong></p><figure id="e0534e7c-15f0-45e9-bb42-cf7039045cfe"><div class="source"><a href="UNix%20LAb%20program%20SEE%2048c01b97169a439a94896e4a172e1489/prg1B.c">prg1B.c</a></div></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="eb42b326-f8eb-4b6c-9e36-e52011c37df9" class="code"><code class="language-C">#include&lt;stdio.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;fcntl.h&gt;
+#include&lt;sys/wait.h&gt;
+void check_offset(int fd,const char *pname)
+{
+    off_t offset=lseek(fd,0,SEEK_CUR);
+    if(offset&lt;0)
+    {
+        perror(&quot;offset&quot;);
+        exit(EXIT_FAILURE);
+    }
+    printf(&quot;%s : the current offset is %ld\n&quot;,pname,offset);
+}
+void write_to_file(int fd,const char *msg,const char *pname )
+{
+    check_offset(fd,pname);
+    if(write(fd,msg,sizeof(msg))==-1)
+    {
+        perror(&quot;offset&quot;);
+        exit(EXIT_FAILURE);
+    }
+    printf(&quot;%s : wrote the message: %s\n&quot;,pname,msg);
+    check_offset(fd,pname);
+}
+void main(int argc,char *argv[])
+{
+    if(argc!=2)
+    {
+        perror(&quot;offset&quot;);
+        exit(EXIT_FAILURE);
+    }
+    int fd=open(argv[1],O_RDWR);
+    if(fd&lt;0)
+    {
+        perror(&quot;offset&quot;);
+        exit(EXIT_FAILURE);
+    }
+    pid_t pid=fork();
+    if(pid&lt;0)
+    {
+        perror(&quot;offset&quot;);
+        exit(EXIT_FAILURE);
+    }
+    else if(pid==0)
+    {
+        printf(&quot;child process was here\n&quot;);
+        write_to_file(fd,&quot;child&quot;,&quot;child&quot;);
+    }
+    else
+    {
+        wait(NULL);
+        printf(&quot;parent process was here\n&quot;);
+        write_to_file(fd,&quot;parent&quot;,&quot;parent&quot;);
+    }
+}
+</code></pre><p id="73ebe860-4690-4ab7-bd8b-97df2efc5223" class=""><strong>program 2A:</strong></p><p id="5631f381-7ad0-42d9-9f43-a6d25ccdd46f" class="">Write a C program to display various details of a file using stat<br/>structure (At least 5 fields).<br/></p><p id="c364e1e5-af92-4820-a5c7-a17b644fa447" class=""><strong>Solution</strong></p><figure id="95aa2fd5-9f1f-4dae-a2bd-fe5710981b7f"><div class="source"><a href="UNix%20LAb%20program%20SEE%2048c01b97169a439a94896e4a172e1489/prg2A.c">prg2A.c</a></div></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="8feaaa64-dd58-4027-b210-c2906a89c1b4" class="code"><code class="language-C" style="white-space:pre-wrap;word-break:break-all">#include&lt;stdio.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;fcntl.h&gt;
+#include&lt;sys/stat.h&gt;
+#include&lt;time.h&gt;
+void file_info(const char *path)
+{
+    struct stat sf;
+    if(stat(path,&amp;sf)==-1)
+    {
+        perror(&quot;stat error&quot;);
+        exit(EXIT_FAILURE);
+    }
+    printf(&quot;the file path %s:\n&quot;,path);
+    printf(&quot;file size %ld:\n&quot;,sf.st_size);
+    printf(&quot;number of blocks %ld\n&quot;,sf.st_blocks);
+    printf(&quot;the symbolink links: %ld\n&quot;,sf.st_nlink);
+    printf(&quot;the permissions: %o\n&quot;,sf.st_mode&amp;0777);
+    printf(&quot;the last aceess time %s\n&quot;,ctime(&amp;sf.st_atime));
+    printf(&quot;the last modification time %s\n&quot;,ctime(&amp;sf.st_mtime));
+    printf(&quot;the last change time %s\n&quot;,ctime(&amp;sf.st_atime));
+    
+}
+void main(int argc,char *argv[])
+{
+    if(argc!=2)
+    {
+       perror(&quot;stat error&quot;);
+        exit(EXIT_FAILURE); 
+    }
+    file_info(argv[1]);
+}
+</code></pre><p id="ee42b261-7a33-43b0-b43c-c9aca52ac53f" class=""><strong>program 2B: Write a C program to simulate system function</strong></p><p id="73fcdf89-0648-450c-8503-da39dac8f786" class=""><strong>Solution</strong></p><figure id="7a84055b-946e-4789-8d5f-d9069d679a92"><div class="source"><a href="UNix%20LAb%20program%20SEE%2048c01b97169a439a94896e4a172e1489/prg2B.c">prg2B.c</a></div></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="431f1ea0-c9d8-4187-848a-151b09f567ea" class="code"><code class="language-C">#include&lt;stdio.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;fcntl.h&gt;
+#include&lt;sys/stat.h&gt;
+#include&lt;string.h&gt;
+void main()
+{
+    char cmd[10];
+    printf(&quot;using system() to execute ls -li command\n&quot;);
+    strcpy(cmd,&quot;ls -li&quot;);
+    system(cmd);
+    
+    printf(&quot;\n using system() to list all files in the directory\n&quot;);
+    strcpy(cmd,&quot;dir&quot;);
+    system(cmd);
+}
+</code></pre><p id="f3e294b3-b71c-41a8-b973-a888a7503e64" class=""><strong>Program3A:</strong></p><p id="30ff6d4f-1b9a-4645-87af-dfbf177bf79a" class="">Write a C program to remove empty files from the given directory</p><p id="d85e288b-afe5-4619-b791-e596660ba9f2" class=""><strong>solution:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="acfe98cf-e183-4340-b900-499732c90554" class="code"><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;dirent.h&gt;
+
+void main() 
+{
+    int fd,n;
+    DIR *dp;
+    struct dirent *dir;
+    //opens current directory
+    dp=opendir(&quot;.&quot;);
+    if(dp==NULL)
+    {
+        perror(&quot;open dir&quot;);
+        exit(EXIT_FAILURE);
+    }
+    while((dir=readdir(dp))!=NULL)
+    {
+        fd = open(dir-&gt;d_name, O_RDWR);
+        if(fd&lt;0)
+        { 
+            perror(&quot;opening file error&quot;);
+            continue;
+        }
+        n=lseek(fd,0,SEEK_END);
+        if(n&lt;0)
+        {
+           perror(&quot;seeking size&quot;);
+           //close(fd);
+           continue;
+        }
+        if(n==0)
+        {
+            if(unlink(dir-&gt;d_name)==-1)
+            {
+               printf(&quot;unable to delete file&quot;); 
+            }
+            else
+            {
+                printf(&quot;deleted file: %s&quot;,dir-&gt;d_name);
+            }
+        }
+    }
+}
+
+</code></pre><p id="799ce0f6-65a7-4a3d-a3a8-f1e0e93ea551" class="">
+</p><p id="57fd4218-861e-4ad4-8177-7d93fa7d75a7" class=""><strong>Program 3B:</strong></p><p id="e95b21e3-6b24-4734-a3d9-e01ce68f2d85" class="">Write a C program to implement ls –li command which lists the files in a specified directory. Your program should Print 5 attributes of files.</p><p id="fbdc592b-4b02-4ff3-9b68-e1357211d3b4" class=""><strong>Solution:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="78c9142b-0b34-4024-9917-43ca24ce5291" class="code"><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;sys/wait.h&gt;
+void main()
+{
+    int pid=fork();
+    if(pid&lt;0)
+    {
+        perror(&quot;fork failed&quot;);
+        exit(EXIT_FAILURE);
+    }
+    else if(pid==0)
+    {
+        //child process
+        execlp(&quot;/bin/ls&quot;,&quot;ls&quot;,&quot;-l&quot;,&quot;.&quot;,NULL);
+    }
+    else
+    {
+        wait(NULL);
+        printf(&quot;child complete&quot;);
+    }
+}</code></pre><p id="14f8c3c8-4c75-428b-914c-7df53204a736" class="">
+</p><p id="34d784a8-ba1b-4fad-991f-ce1b52e1ce6e" class=""><strong>Program 4A</strong></p><p id="db965d67-f63a-4c99-aadf-0477abb79173" class="">a) Write a C program to demonstrate the creation of soft links and hard links.</p><p id="84398f96-9521-4189-8b44-a635331d2b3a" class=""><strong>Solution</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="17306d7d-476d-4c30-8e05-a1a22b4fce22" class="code"><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;string.h&gt;
+void main(int argc,char *argv[])
+{
+    if(argc!=3 &amp;&amp; argc!=4)
+    {
+        perror(&quot;ERROR&quot;);
+        exit(EXIT_FAILURE);
+    }
+    char *source=argv[1];
+    char *target=argv[2];
+    if(argc==3)
+    {
+        printf(&quot;soft link creation started from %s to %s\n&quot;,source,target);
+        if(symlink(source,target)==-1)
+        {
+            perror(&quot;error in creation of softlink&quot;);
+            exit(EXIT_FAILURE);
+        }
+    }
+    else if(argc==4 &amp;&amp; strcmp(argv[3],&quot;hard&quot;)==0)
+    {
+        printf(&quot;hard link creation started from %s to %s\n&quot;,source,target);
+        if(link(source,target)==-1)
+        {
+            perror(&quot;error in creation of hardlink&quot;);
+            exit(EXIT_FAILURE);
+        }
+    }
+    else
+    {
+        printf(&quot;invalid usage&quot;);
+        exit(EXIT_FAILURE);
+    }
+}</code></pre><p id="57122970-7240-46b1-a289-d0613ab723cd" class="">
+</p><p id="13b9a060-e540-4395-b67f-4c3cd03ca9ad" class=""><strong>Program 4B:</strong></p><p id="971d1d80-17ed-472e-86ca-5ed0c953f365" class="">Write a C program to<br/>i. To create a child process.<br/>ii. The child should execute an interpreter file by passing a few<br/>arguments<br/>iii. Create an interpreter file that has the path of echoall.c file and<br/>pass one argument<br/>iv. Create echoall.c file which prints the arguments received from<br/>both child process and interpreter file<br/></p><p id="9e226e12-80c5-4b49-877d-82d3730b4005" class=""><strong>Solution</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="81d0329d-1023-43b3-8757-b69cfbcb746d" class="code"><code class="language-C">//program4b.c
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;sys/wait.h&gt;
+void main()
+{
+    pid_t pid=fork();
+    if(pid&lt;0)
+    {
+        perror(&quot;Fork Failed:&quot;);
+        exit(EXIT_FAILURE);
+    }
+    else if(pid==0)
+    {
+        //child
+        char *args[]={&quot;./echoall&quot;,NULL};
+        char *env_argv[]={&quot;ENV_VAR=Child&quot;,NULL};
+        execve(args[0],args,env_argv);
+        perror(&quot;Execve&quot;);
+        exit(EXIT_FAILURE);
+    }
+    else
+    {
+        //parent
+        wait(NULL);
+        char *args[]={&quot;./echoall&quot;,NULL};
+        char *env_argv[]={&quot;ENV_VAR=parent&quot;,NULL};
+        execve(args[0],args,env_argv);
+        perror(&quot;Execve&quot;);
+        exit(EXIT_FAILURE);
+    }
+}</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c9c3f007-84df-47b3-956b-271ce7bf20d7" class="code"><code class="language-C">//echoall.c
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+void main(int argc,char *argv[],char env_argv[])
+{
+    printf(&quot;Recieved arguments\n&quot;);
+    for(int i=0;i&lt;argc;i++)
+    {
+        printf(&quot;%s\n&quot;,argv[i]);
+    }
+    printf(&quot;Recived Environment variables&quot;);
+    for(char **env;env!=0;++env)
+    {
+        printf(&quot;%s\n&quot;,*env);
+    }
+}</code></pre><p id="1850d4f8-9764-4e90-89bb-7bd2ed06c702" class="">Interpreter file </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="73b830de-d6ff-4094-a44b-44f3f7cf23dc" class="code"><code class="language-C">#!/bin/bash
+gcc -o echoall echoall.c
+</code></pre><p id="ee70a54e-adfc-485e-ac36-cf1043beeb7d" class=""><strong>Steps to Run:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cd9b742a-5064-49f7-9334-cc52285f91c1" class="code"><code class="language-C">Step1: gcc -o echoall echoall.c
+step2: gcc -o prg4B  prg4B.c
+step3:  ./prg4B
+step4:  output
+Received arguments:
+./echoall
+
+Received environment variables:
+ENV_VAR=child_value
+Received arguments:
+./echoall
+
+Received environment variables:
+ENV_VAR=parent_value</code></pre><p id="bdd5237a-9c06-4a34-8aef-9ac75f8cc9f2" class="">
+</p><p id="173641b2-1985-4156-9c50-78bc9c306299" class=""><strong>Program 5A:</strong></p><p id="9405221b-f545-4aed-9a00-65bee3ada4cc" class="">Write a program to copy access and modification time of a file to another file using utime function.</p><p id="8ff91b69-5665-43f9-9288-af77e36266f1" class=""><strong>Solution</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4425afce-47a8-4090-9661-8962f1948c9c" class="code"><code class="language-C">//program5A.c
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;utime.h&gt;
+#include &lt;sys/stat.h&gt;
+#include&lt;sys/types.h&gt;
+void main(int argc,char *argv[])
+{
+    if(argc!=3)
+    {
+        perror(&quot;ERROR in argc&quot;);
+        exit(EXIT_FAILURE);
+    }
+    struct stat sf;
+    struct utimbuf new_times;
+    if(stat(argv[1],&amp;sf)==-1)
+    {
+         perror(&quot;ERROR in stat&quot;);
+        exit(EXIT_FAILURE);
+    }
+    new_times.actime=sf.st_atime;
+    new_times.modtime=sf.st_mtime;
+    if(utime(argv[2],&amp;new_times)==-1)
+    {
+         perror(&quot;ERROR in utime&quot;);
+        exit(EXIT_FAILURE);
+    }
+}</code></pre><p id="39bfe6e0-101b-428e-bbb1-69ef63757c69" class=""><strong>OR:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d96d9397-4cef-4427-8524-ae3553cddb74" class="code"><code class="language-C">#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;time.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;utime.h&gt;
+#include&lt;sys/stat.h&gt;
+
+void copy_times(const char * source_file, const char * target_file)
+{
+    struct stat source_st;
+    struct utimbuf target_st;
+    if(stat(source_file ,&amp;source_st)!=0)
+    {
+        perror(&quot;stat&quot;);
+        exit(EXIT_FAILURE);
+    }
+    target_st.actime=source_st.st_atime;
+    target_st.modtime=source_st.st_mtime;
+    if(utime(target_file,&amp;target_st)!=0)
+    {
+        perror(&quot;utime&quot;);
+        exit(EXIT_FAILURE);
+    }
+    printf(&quot;copied access and modification time to target file %s check this&quot;,target_file);
+    //open the target file to copy the times
+    FILE *target_fp =fopen(target_file,&quot;a&quot;);
+    if(target_fp==NULL)
+    {
+        perror(&quot;not oppening file&quot;);
+        exit(EXIT_FAILURE);
+    }
+    fprintf(target_fp,&quot;\nAccessTime: %sModification Time: %s&quot;,ctime(&amp;source_st.st_atime),ctime(&amp;source_st.st_mtime));
+    fclose(target_fp);
+}
+
+int main()
+{
+    const char *source_file=&quot;soucre.txt&quot;;
+    const char *target_file=&quot;target.txt&quot;;
+    FILE *source=fopen(source_file,&quot;w&quot;);
+    if(source==NULL)
+    {
+        perror(&quot;error&quot;);
+        exit(EXIT_FAILURE);
+    }
+    fprintf(source,&quot;this is source file.&quot;);
+    fclose(source);
+    
+    FILE *target=fopen(target_file,&quot;w&quot;);
+    if(source==NULL)
+    {
+        perror(&quot;error&quot;);
+        exit(EXIT_FAILURE);
+    }
+    fprintf(target,&quot;this is target file.&quot;);
+    fclose(target);
+    sleep(1);
+    copy_times(source_file,target_file);
+    return 0;
+}
+</code></pre><p id="8929ad7e-9c1d-4a5b-8432-5642832baa81" class="">
+</p><p id="13e67878-cdc1-4957-888c-d667b3308aad" class="">Program 5B:</p><p id="1034c606-76e0-4cdb-86ed-f7bdcb691965" class="">Write a C program using sigaction system call which calls a signal handler on SIGINT signal and then reset the default action of the SIGINT signal.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="337ec0ef-4384-4f24-8a67-05761cd4b8b2" class="code"><code class="language-C">#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;signal.h&gt;
+#include &lt;unistd.h&gt;
+
+void sigint_handler(int signum)
+{
+    printf(&quot;\nsignal caught (signal %d) custom signal handler\n&quot;,signum);
+}
+void main()
+{
+    struct sigaction sa;
+    //initialization
+    sa.sa_handler=sigint_handler;
+    sigemptyset(&amp;sa.sa_mask);
+    sa.sa_flags=0;
+    
+    //setting signal
+    if(sigaction(SIGINT,&amp;sa,NULL)==-1)
+    {
+        perror(&quot;sigaction&quot;);
+        exit(EXIT_FAILURE);
+    }
+    printf(&quot;press ctrl+c to set signal waitaining...\n&quot;);
+    pause();
+    //resetting
+    sa.sa_handler=SIG_DFL;
+    if(sigaction(SIGINT,&amp;sa,NULL)==-1)
+    {
+        perror(&quot;sigaction&quot;);
+        exit(EXIT_FAILURE);
+    }
+    printf(&quot;\nresetting to default press ctrl+c exit...\n&quot;);
+    pause();
+}</code></pre><p id="5caab2d9-4ec4-4712-b280-4b5633b14ab5" class="">
+</p><p id="b9099911-69d0-48bf-bffd-9e7dd1bceb5e" class=""><strong>Program 6A</strong></p><p id="42349a3d-6ec1-47d2-9dd4-e5702b1832c5" class="">Write a program to read n characters from a file and append them back to the same file using dup2 function.</p><p id="c194d8b0-8916-4817-ba68-56254a92a023" class=""><strong>Solution</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c7b03742-4623-4f31-b9e7-09c3be72c443" class="code"><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;fcntl.h&gt;
+void main()
+{
+    int fd1,fd2;
+    char buff[50];
+    fd1=open(&quot;test.txt&quot;,O_RDWR,0);
+    fd2=open(&quot;target.txt&quot;,O_CREAT|O_RDWR,0777);
+    fd2=dup2(fd1,fd2);
+    if(fd2&lt;0)
+    {
+        printf(&quot;dup2 error\n&quot;);
+        close(fd1);
+    }
+    printf(&quot;file descriptors %d &amp; %d&quot;,fd1,fd2);
+    if(read(fd1,buff,20)&lt;0)
+    {
+        printf(&quot;read failed\n&quot;);
+        close(fd1);
+        close(fd2);
+    }
+    if(lseek(fd2,0,SEEK_END)&lt;0)
+    {
+        printf(&quot;lseek failed\n&quot;);
+        close(fd1);
+        close(fd2);
+    }
+    if(write(fd2,buff,20)&lt;0)
+    {
+        printf(&quot;write failed\n&quot;);
+        close(fd1);
+        close(fd2);
+    }
+    printf(&quot;%s\n&quot;,buff);
+    close(fd1);
+    close(fd2);
+}</code></pre><p id="86e38687-4987-4251-98ee-bc06dd85bbda" class="">
+</p><p id="1cc1e8ab-e9da-467f-8f0e-ab1c42205547" class=""><strong>Program 6B:</strong></p><p id="d4d9734c-cb12-4fc7-9e94-71f8a3e37abb" class="">Consider the last 100 bytes as a region. Write a C program to check whether the region is locked or not. If the region is locked, print pid of the process which has locked. If the region is not locked, lock the region with an exclusive lock, read the last 50 bytes and unlock the region.</p><p id="511a531c-25d4-4a9a-bed9-3fecee0c10c1" class=""><strong>Solution:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0ced0c84-2c8d-4bd4-8397-33fb121a5bbf" class="code"><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;errno.h&gt;
+
+int main(int argc, char *argv[])
+{
+    int fd;
+    char buffer[51];  // Buffer to hold the last 50 bytes plus a null terminator
+    struct flock fvar;
+    if (argc != 2)
+    {
+        printf(&quot;Usage: %s filename\n&quot;, argv[0]);
+        return -1;
+    }
+    if ((fd = open(argv[1], O_RDWR)) == -1)
+    {
+        perror(&quot;open&quot;);
+        exit(1);
+    }
+    // Initialize the flock structure
+    fvar.l_type = F_WRLCK;
+    fvar.l_whence = SEEK_END;
+    fvar.l_start = -100;  // Start 100 bytes from the end of the file
+    fvar.l_len = 100;     // Length of 100 bytes
+    printf(&quot;Press enter to set lock\n&quot;);
+    getchar();
+    printf(&quot;Trying to get lock...\n&quot;);
+    if (fcntl(fd, F_SETLK, &amp;fvar) == -1)
+    {
+        fcntl(fd, F_GETLK, &amp;fvar);
+        printf(&quot;\nFile already locked by process (pid): %d\n&quot;, fvar.l_pid);
+        close(fd);
+        return -1;
+    }
+    printf(&quot;Locked\n&quot;);
+
+    if (lseek(fd, -50, SEEK_END) == -1)
+    {
+        perror(&quot;lseek&quot;);
+        close(fd);
+        exit(1);
+    }
+    ssize_t bytes_read = read(fd, buffer, 50);
+    if (bytes_read == -1)
+    {
+        perror(&quot;read&quot;);
+        close(fd);
+        exit(1);
+    }
+    buffer[bytes_read] = &#x27;\0&#x27;;  // Null-terminate the buffer
+    printf(&quot;Data read from file:\n&quot;);
+    puts(buffer);
+    printf(&quot;Press enter to release lock\n&quot;);
+    getchar();
+    // Unlock the region
+    fvar.l_type = F_UNLCK;
+    if (fcntl(fd, F_SETLK, &amp;fvar) == -1)
+    {
+        perror(&quot;fcntl&quot;);
+        close(fd);
+        exit(1);
+    }
+    printf(&quot;Unlocked\n&quot;);
+    close(fd);
+    return 0;
+}
+</code></pre><p id="cc917e79-1bcd-4200-b37e-091c356ae2a1" class="">
+</p><p id="83bbccc8-edcc-46e0-ac40-dcc31a6d9309" class=""><strong>Program 7A:</strong></p><p id="53a6da57-ba7c-4f55-9aec-ec0c59544aca" class="">Write a C program to illustrate the effect of setjmp and longjmp  functions on register and volatile variables.</p><p id="7d29dd62-0716-49e5-b665-ea4707578493" class=""><strong>Solution:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2edca660-e6d4-4dc8-ac2d-d6d861632afa" class="code"><code class="language-C">#include&lt;stdio.h&gt;
+#include&lt;setjmp.h&gt;
+jmp_buf env;
+void test_jumps()
+{
+    volatile int var_val=10;
+    register int var_reg=20;
+    printf(&quot;before set jump\n&quot;);
+    printf(&quot;the volatile register value %d\n&quot;,var_val);
+    printf(&quot;the  register value %d\n&quot;,var_reg);
+    if(setjmp(env)==0)
+    {
+        var_val=100;
+        var_reg=200;
+        printf(&quot;after set jump\n&quot;);
+        printf(&quot;the volatile register value %d\n&quot;,var_val);
+        printf(&quot;the  register value %d\n&quot;,var_reg);
+    }
+    else
+    {
+        printf(&quot;after long jump\n&quot;);
+        printf(&quot;the volatile register value %d\n&quot;,var_val);
+        printf(&quot;the  register value %d\n&quot;,var_reg);
+    }
+}
+void main()
+{
+    printf(&quot;demo of setjmp\n&quot;);
+    test_jumps();
+    printf(&quot;after setjum back to main\n&quot;);
+    longjmp(env,1);
+    printf(&quot;this line never execuutes becaue of longjmp&quot;);
+}</code></pre><p id="18178f89-ce98-4da1-bec6-8d1e2de0ee39" class="">
+</p><p id="8f1a9faa-4864-4104-896c-faa6baa8dba9" class=""><strong>Program 7B:</strong></p><p id="edd1ecb6-3ae2-4f56-9bdc-462c6058ff93" class="">C program to simulate copy command by accepting the filenames<br/>from the command line.<br/></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="57f67212-abae-4fbc-bcdf-687a579edd6d" class="code"><code class="language-C">#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+#define buff_size 2024
+void copy_files(const char * source,const char *target1)
+{
+    FILE *src,*target;
+    char buff[buff_size];
+    src=fopen(source,&quot;rb&quot;);
+    if(src==NULL)
+    {
+        printf(&quot;error in opening in source file\n&quot;);
+    }
+    target=fopen(target1,&quot;wb&quot;);
+    if(target==NULL)
+    {
+        printf(&quot;error in opening in target file\n&quot;);
+    }
+    size_t byte_read;
+    while((byte_read=fread(buff,1,buff_size,src))&gt;0)
+    {
+        size_t b=fwrite(buff,1,byte_read,target);
+        if(b!=byte_read)
+        {
+            printf(&quot;error in writing\n&quot;);
+        }
+    }
+    printf(&quot;sucessfully copied\n&quot;);
+    
+}
+void main(int argc,char *argv[])
+{
+    if(argc!=3)
+    {
+        printf(&quot;not enough argments\n&quot;);
+    }
+    copy_files(argv[1],argv[2]);
+}</code></pre><p id="7d597eb8-589e-4de9-895d-239e86d9b339" class="">
+</p><p id="12012877-4ea3-47cd-82bc-603990e6d1e6" class=""><strong>Program 8A:</strong></p><p id="efa534fe-6c22-49cb-99b5-03c5c0bcd4f7" class="">Write a C program that takes the file name as an argument and prints<br/>the type of the given file<br/></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="055ae950-acc7-4ee4-bc7b-4da784c0c6c1" class="code"><code class="language-C">#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;sys/stat.h&gt;
+void file_type(const char *file)
+{
+    struct stat fstat;
+    if(stat(file,&amp;fstat)==-1)
+    {
+        perror(&quot;stat error&quot;);
+        exit(EXIT_FAILURE);
+    }
+    if(S_ISREG(fstat.st_mode))
+    {
+        printf(&quot; the File %s is a regular file\n&quot;,file);
+    }
+    else if(S_ISDIR(fstat.st_mode))
+    {
+        printf(&quot; the File %s is a directory \n&quot;,file);
+    }
+    else if(S_ISCHR(fstat.st_mode))
+    {
+        printf(&quot; the File %s is a charecter device\n&quot;,file);
+    }
+    else if(S_ISFIFO(fstat.st_mode))
+    {
+        printf(&quot; the File %s is a FIFO device\n&quot;,file);
+    }
+    else if(S_ISLNK(fstat.st_mode))
+    {
+        printf(&quot; the File %s is a Linked file\n&quot;,file);
+    }
+    else if(S_ISSOCK(fstat.st_mode))
+    {
+        printf(&quot; the File %s is a Socket\n&quot;,file);
+    }
+    else
+    {
+        printf(&quot;unknown file\n&quot;);
+    }
+}
+void main(int argc,char *argv[])
+{
+    if(argc!=2)
+    {
+        perror(&quot;argument error&quot;);
+        exit(EXIT_FAILURE);
+    }
+    file_type(argv[1]);
+}</code></pre><p id="1fd2c0e6-62f4-4ca5-8c25-1199d55ba169" class="">
+</p><p id="132582b5-a0ab-42da-95e9-a85ef2efba78" class=""><strong>Program 8B:</strong></p><p id="3a2e6c6e-2fc0-4fe6-9741-c09cc6a03c09" class="">Write a C program to perform the following operations<br/>i. To create a child process<br/>ii. The child process should execute a program (using exec( )) to<br/>show the use of the access function<br/>iii. The parent process should wait for the child process to exit<br/>iv. Also print the necessary process IDs<br/></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="69ff24c5-1187-4b05-b382-b25cba96ef05" class="code"><code class="language-C">//program8b.c
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/wait.h&gt;
+
+int main() {
+    int pid = fork();
+    printf(&quot;Parent PID: %d\n&quot;,getppid());
+    if (pid &lt; 0) {
+        perror(&quot;fork failed&quot;);
+        exit(EXIT_FAILURE);
+    } 
+    else if (pid == 0) {
+        // Child process
+        printf(&quot;Child process with PID: %d\n&quot;, getpid());
+        printf(&quot;Child executing access_demo program\n&quot;);
+        execlp(&quot;./access&quot;, &quot;access&quot;, NULL);
+        perror(&quot;execlp failed&quot;);
+        exit(EXIT_FAILURE);
+    } 
+    else {
+        printf(&quot;Parent process with PID: %d waiting for child to complete\n&quot;, getpid());
+        wait(NULL);
+        printf(&quot;Child process with PID: %d has completed\n&quot;, pid);
+    }
+    return 0;
+}
+</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="34228ab0-798b-491a-8f1c-4e8b71bd035c" class="code"><code class="language-C">//acces.c
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+int main() {
+    const char *filename = &quot;testfile.txt&quot;;
+    if (access(filename, F_OK) != -1) 
+    {
+        printf(&quot;File %s exists.\n&quot;, filename);
+        if (access(filename, R_OK) != -1)
+            printf(&quot;File %s is readable.\n&quot;, filename);
+        else
+            printf(&quot;File %s is not readable.\n&quot;, filename);
+        if (access(filename, W_OK) != -1)
+            printf(&quot;File %s is writable.\n&quot;, filename);
+        else
+            printf(&quot;File %s is not writable.\n&quot;, filename);
+    }   
+    else {
+        printf(&quot;File %s does not exist.\n&quot;, filename);
+    }
+    return 0;
+}
+</code></pre><p id="81355850-d0d9-41bd-8cc4-c1f026b8d70e" class=""><strong>steps to run:</strong></p><p id="458a64a6-750b-4d07-9dd3-2f78e90b7ff1" class="">gcc -o access access.c </p><p id="45442c19-5fd5-4086-8a3b-0ce27a038897" class="">gcc -o program8b program8b.c</p><p id="6309b953-164f-4e21-a2fc-a3455b9e9c0e" class="">vi testfile.txt</p><p id="6b3462d6-d717-4542-812b-00cdadd8d680" class="">./program8b</p><p id="ffbc8969-6c6c-4c50-9675-e2eee03d49c8" class="">
+</p><p id="9b2926ce-7838-4ebe-90d7-9b7401d90f5f" class="">
+</p><p id="7bb47034-4bb0-46f6-b761-a6ebd2c4c211" class=""><strong>Program 9A:</strong></p><p id="26b1ad05-7b06-4c9e-a582-897ffeff8764" class="">Write a C program to demonstrate the usage of umask and chmod functions.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="99d7eab0-6f05-4195-a8a3-84c452be4883" class="code"><code class="language-C">#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;sys/stat.h&gt;
+void main()
+{
+    mode_t old_mask;
+    old_mask=umask(0);
+    printf(&quot;the old mask value is:%d\n&quot;,old_mask);
+    umask(027);
+    const char *filename=&quot;testfile.txt&quot;;
+    FILE *fp=fopen(filename,&quot;w&quot;);
+    if(fp==NULL)
+    {
+        perror(&quot;creation failed&quot;);
+        exit(EXIT_FAILURE);
+    }
+    if(chmod(filename,S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)==-1)
+    {
+        perror(&quot;Change permission&quot;);
+        exit(EXIT_FAILURE);
+    }
+    printf(&quot;permission changed\n&quot;);
+}</code></pre><p id="f334494a-e84d-4fb0-9813-388d18ba035d" class="">
+</p><p id="4a0f8323-a95a-46b2-94b6-fd65c3c25518" class=""><strong>Program 9B:</strong></p><p id="08ca7106-1b57-4c57-84da-73733f96a91d" class="">Write a C program<br/>i. To read the first 20 characters from a file<br/>ii. seek to 10th byte from the beginning and display 20 characters<br/>from there<br/>iii. seek 10 bytes ahead from the current file offset and display 20<br/>characters<br/>iv. Display the file size<br/></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="3159b823-f6a7-4148-8edc-2cb8f991e392" class="code"><code class="language-C">#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+void main()
+{
+    int file=0,n;
+    char buff[25];
+    if((file=open(&quot;test.txt&quot;,O_RDONLY))&lt;0)
+    {
+        perror(&quot;file opening failed&quot;);
+    }
+    if(read(file,buff,20)!=20)
+    {
+        perror(&quot;read fial&quot;);
+    }
+    else
+    {
+        write(STDOUT_FILENO,buff,20);
+    }
+    printf(&quot;\n&quot;);
+    if(lseek(file,20,SEEK_SET)==-1)
+    {
+        perror(&quot;SEEK_SET error&quot;);
+    }
+    else
+    {
+       if(read(file,buff,20)!=20)
+        {
+            perror(&quot;read fial&quot;);
+        }
+        else
+        {
+            write(STDOUT_FILENO,buff,20);
+        } 
+    }
+    printf(&quot;\n&quot;);
+    if(lseek(file,20,SEEK_CUR)==-1)
+    {
+        perror(&quot;SEEK_SET error&quot;);
+    }
+    else
+    {
+       if(read(file,buff,20)!=20)
+        {
+            perror(&quot;read fial&quot;);
+        }
+        else
+        {
+            write(STDOUT_FILENO,buff,20);
+        } 
+    }
+    printf(&quot;\n&quot;);
+    if((n=lseek(file,0,SEEK_END))==-1)
+    {
+        perror(&quot;file size error&quot;);
+    }
+    else
+    {
+        printf(&quot;the number of Bytes %d\n&quot;,n);
+    }
+}</code></pre><p id="9ecfb564-6277-4129-b0ff-8c0cddae98a4" class="">
+</p><p id="98dc83a5-5fc8-4ef2-8ae8-d17a9275769d" class=""><strong>Program 10A:</strong></p><p id="26e30702-532b-4be8-821e-e5f1fab87402" class="">Write a C program such that it initializes itself as a Daemon Process.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="aaf04ac7-dde0-477a-bfbb-6c53690f5db6" class="code"><code class="language-C">#include&lt;stdio.h&gt;
+#include&lt;syslog.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+#include &lt;sys/stat.h&gt;
+#include&lt;fcntl.h&gt;
+void create_deamon()
+{
+    pid_t pid=fork();
+    if(pid&lt;0)
+    {
+        exit(EXIT_FAILURE);
+    }
+    if(pid&gt;0)
+    {
+        exit(EXIT_SUCCESS);
+    }
+    if(setsid()&lt;0)
+    {
+      exit(EXIT_FAILURE);  
+    }
+    umask(0);
+    if(chdir(&quot;/&quot;)&lt;0)
+    {
+        exit(EXIT_FAILURE);
+    }
+    open(&quot;/dev/null&quot;,O_RDONLY);
+    open(&quot;/dev/null&quot;,O_WRONLY);
+    open(&quot;/dev/null&quot;,O_RDWR);
+    close(STDIN_FILENO);
+    close(STDOUT_FILENO);
+    close(STDERR_FILENO);
+}
+void main()
+{
+    create_deamon();
+    openlog(&quot;Deamon_ex&quot;,LOG_PID,LOG_DAEMON);
+    while(1)
+    {
+        syslog(LOG_NOTICE,&quot;Daemon Running&quot;);
+        sleep(30);
+    }
+}</code></pre><p id="9610ddf5-1950-49ae-aed1-0d91b6f6d37f" class=""><strong>Steps to Run:</strong></p><p id="c028d394-7aeb-4376-a0e4-6faea99627ce" class="">cc program_name.c<br/>./a.out<br/>ps aux (question mark depicts a daemon process)<br/>tail -f /var/log/syslog (optional to print log statement<br/><div class="indented"><ul id="b4d1cc44-5c55-4894-9486-82c41d6aa547" class="bulleted-list"><li style="list-style-type:disc">Your daemon process will not have a terminal (TTY) associated with it, as indicated by the <code>?</code> in the TTY column.</li></ul><ul id="eaa5e54e-f305-4776-94ff-ed5938dada81" class="bulleted-list"><li style="list-style-type:disc">The <code>COMMAND</code> column will show the command that started the process, which should include your daemon&#x27;s logging.</li></ul></div></p><p id="831bdfb6-e497-4a79-b607-2c14276c2835" class=""><strong>Program 10B:</strong></p><p id="62dbde29-ec30-45bf-a5e5-a4a8a88ff518" class="">Demonstrate the working of wait and waitpid system calls with a program</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="baac66d6-c76d-4f9b-9fde-e16c1e5c6c37" class="code"><code class="language-C">#include&lt;stdio.h&gt;
+#include&lt;syslog.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;unistd.h&gt;
+#include &lt;sys/wait.h&gt;
+#include&lt;fcntl.h&gt;
+
+void main()
+{
+    pid_t cpid1,cpid2;
+    int status;
+    cpid1=fork();
+    if(cpid1&lt;0)
+    {
+        perror(&quot;Fork Failed&quot;);
+        exit(EXIT_FAILURE);
+    }
+    else if(cpid1==0)
+    {
+        printf(&quot;Child1: executing with PID %d\n&quot;,getpid());
+        exit(1);
+    }
+    printf(&quot;Parent:Forked the child1 with PID:%d\n&quot;,cpid1);
+    cpid2=fork();
+    if(cpid2&lt;0)
+    {
+        perror(&quot;Fork Failed&quot;);
+        exit(EXIT_FAILURE);
+    }
+     else if(cpid2==0)
+    {
+        printf(&quot;Child2: executing with PID %d\n&quot;,getpid());
+        exit(2);
+    }
+    printf(&quot;Parent:Forked the child1 with PID:%d\n&quot;,cpid2);
+    printf(&quot;Parent: waiting for child2 to complete\n&quot;);
+    waitpid(cpid2,&amp;status,0);
+    if(WIFEXITED(status))
+    {
+        printf(&quot;parent: the child2 completed with PID:%d and status is %d\n&quot;,getpid(),WEXITSTATUS(status));
+    }
+    printf(&quot;parent continues execution&quot;);
+}</code></pre><p id="b98425eb-9816-462f-896a-e1a9e00b504c" class="">
+</p><p id="0378f4ec-9faf-4bb7-b234-c8aff53fe4d4" class=""><strong>Program 11A:</strong></p><p id="94e1aa13-1dc8-4e56-82c2-e16f10eb004f" class="">Write a program to differentiate between dup and dup2 functions </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="75ac95c8-4ac9-45d2-a690-fc3d0c10aed5" class="code"><code class="language-C">//dup() function demo
+#include&lt;stdio.h&gt;
+#include&lt;fcntl.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;sys/wait.h&gt;
+void main()
+{
+    int fd1=0,fd2=0;
+    char buff[20]=&quot;abcde&quot;;
+    if((fd1=open(&quot;test.txt&quot;,O_RDWR,0))&lt;0)
+    {
+        perror(&quot;opening failed&quot;);
+        exit(EXIT_FAILURE);
+    }
+    fd2=dup2(fd1);
+    printf(&quot;\nthe file descriptors: %d  %d&quot;,fd1,fd2);
+    write(fd1,buff,6);
+}</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="661a53e9-5690-4925-85af-a9e61a786c5b" class="code"><code class="language-C">//dup2() function demo
+#include&lt;stdio.h&gt;
+#include&lt;fcntl.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;sys/wait.h&gt;
+void main()
+{
+    int fd1=0,fd2=0;
+    char buff[20]=&quot;abcde&quot;;
+    if((fd1=open(&quot;test.txt&quot;,O_RDWR,0))&lt;0)
+    {
+        perror(&quot;opening failed&quot;);
+        exit(EXIT_FAILURE);
+    }
+    fd2=dup2(fd1);
+    printf(&quot;\nthe file descriptors: %d  %d&quot;,fd1,fd2);
+    write(fd1,buff,6);
+}</code></pre><p id="d6b1afa3-ae8c-44cc-97d8-8ec6a82c0505" class="">
+</p><p id="57ea4a9c-0644-4a66-ac5f-d80e79ee91ce" class="">
+</p><p id="45add8b0-b382-4aa5-a3a1-09d06cbd1686" class=""><strong>Program 11B:</strong><div class="indented"><p id="5416d609-300b-40d1-9a8e-ac44f09069b8" class="">Write a program to perform the following operations:<br/>i) To create a child process.<br/>ii) The child process should execute a separate program (using exec() function) that calculates<br/>the addition of two numbers by passing two integer values.<br/>iii) Parent process should wait for the child to complete<br/></p></div></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="149f35db-d249-411f-bf14-1e98737ba540" class="code"><code class="language-C">//program11B.c
+#include&lt;stdio.h&gt;
+#include&lt;fcntl.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;sys/wait.h&gt;
+
+void  main()
+{
+    int pid;
+    pid=fork();
+    if(pid&lt;0)
+    {
+        perror(&quot;Fork failed&quot;);
+        exit(EXIT_FAILURE);
+    }
+    else if(pid==0)
+    {
+        printf(&quot;the child process executes that calculates the addition of two numbers\n&quot;);
+        execl(&quot;./sum&quot;,&quot;sum&quot;,NULL);
+        perror(&quot;EXEC&quot;);
+        exit(EXIT_FAILURE);
+    }
+    else
+    {
+        printf(&quot;parent procees waiting for child to complete&quot;);
+        wait(NULL);
+    }
+}</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="642710f3-5882-4a00-9553-6890437bfa66" class="code"><code class="language-C">//sum.c
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+void main()
+{
+    int n1,n2;
+    printf(&quot;Enter first Number\n&quot;);
+    scanf(&quot;%d&quot;,&amp;n1);
+    printf(&quot;Enter second Number\n&quot;);
+    scanf(&quot;%d&quot;,&amp;n2);
+    printf(&quot;The sum of two Numbers:%d&quot;,(n1+n2));
+}</code></pre><p id="192fc436-7f24-4237-8864-72af441fa868" class="">Steps to execute:</p><ol type="1" id="c052325c-e79b-4019-a563-2232dc761781" class="numbered-list" start="1"><li>gcc -o sum sum.c</li></ol><ol type="1" id="4253d45b-ade0-4214-8be2-c9470b61ce05" class="numbered-list" start="2"><li>gcc -o prg11 program11B.c</li></ol><ol type="1" id="6ec073bf-066f-4128-ac95-40aef3a1aeca" class="numbered-list" start="3"><li>./prg11</li></ol><p id="f1de8828-5167-4205-bee5-dc4c26c2d797" class="">
+</p><p id="a5c00d05-ff77-4293-a483-74d5b0c3f9c2" class=""><strong>Program12 A:</strong></p><p id="93ebe11a-57b7-457b-9623-1c6efc8fd7df" class="">Write a program to demonstrate the zombie state of a process and provide the solution for the same.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a6ba5171-c66c-41a3-84ab-a075788cf8a6" class="code"><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;sys/wait.h&gt;
+
+int main(void) {
+    pid_t pid, pid1, pid2;
+
+    // Fork the first child
+    if ((pid = fork()) &lt; 0) {
+        perror(&quot;fork error&quot;);
+        exit(EXIT_FAILURE);
+    } else if (pid == 0) { 
+        // First child process
+        if ((pid1 = fork()) &lt; 0) {
+            perror(&quot;fork error&quot;);
+            exit(EXIT_FAILURE);
+        } else if (pid1 == 0) {
+            // Second child (grandchild) process
+            sleep(5); // Simulate some work
+            printf(&quot;Second child (grandchild) pid: %d, parent pid: %ld\n&quot;, getpid(), (long)getppid());
+            exit(0);
+        } else {
+            // First child process exits immediately
+            printf(&quot;First child (parent of grandchild) exiting, pid: %d\n&quot;, getpid());
+            exit(0);
+        }
+    }
+
+    // Parent process waits for the first child to terminate
+    if ((pid2 = waitpid(pid, NULL, 0)) != pid) {
+        perror(&quot;waitpid error&quot;);
+        exit(EXIT_FAILURE);
+    }
+
+    // Parent process after first child has terminated
+    printf(&quot;Terminated first child pid: %d\n&quot;, pid2);
+
+    // Sleep to ensure the second child (grandchild) has time to be adopted by init and complete its work
+    sleep(10);
+
+    return 0;
+}</code></pre><p id="63e6378f-569d-493f-a55f-677b9e6b3457" class=""><strong>explaination:</strong><div class="indented"><ul id="63b5e6a1-d447-4faa-a41b-149eae95ba68" class="bulleted-list"><li style="list-style-type:disc"><strong>Zombie State Creation</strong>:<ul id="92b3cae6-d4a9-45cb-a688-263a3d5a7f37" class="bulleted-list"><li style="list-style-type:circle">When the first child process exits, it becomes a zombie because its exit status is not yet read by the parent process.</li></ul><ul id="f161a2ff-9a92-408f-a912-01410d0fbc82" class="bulleted-list"><li style="list-style-type:circle">This is demonstrated by the fact that the first child exits immediately after forking the second child, leaving its exit status in the process table until the parent calls <code>waitpid()</code>.</li></ul></li></ul><ul id="efa6b241-c91c-40ea-ae9b-29c2851f264e" class="bulleted-list"><li style="list-style-type:disc"><strong>Preventing Zombie State</strong>:<ul id="e8097b26-e4b0-49ac-98dd-5f6ff302aa4b" class="bulleted-list"><li style="list-style-type:circle">The parent process calls <code>waitpid()</code> to wait for the first child to terminate. This reaps the first child process, cleaning up the zombie state.</li></ul><ul id="405376c3-0655-4828-bdaa-053bb68069f5" class="bulleted-list"><li style="list-style-type:circle">The parent then prints the PID of the terminated first child to confirm it has been reaped.</li></ul></li></ul></div></p><p id="027bf58c-e275-481f-b76b-fe097bf5de35" class="">
+</p><p id="0101cbf4-ea79-4d19-9ae2-166e1c0964b9" class=""><strong>Program12B:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="394e1c92-2bae-415c-be37-89d5809cc469" class="code"><code class="language-C">Same As Program4B</code></pre><p id="7d151277-861e-4c90-b098-59aecb81ca40" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
